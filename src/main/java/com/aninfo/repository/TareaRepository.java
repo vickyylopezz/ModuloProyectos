@@ -1,0 +1,12 @@
+package com.aninfo.repository;
+
+import com.aninfo.model.Tarea;
+import java.util.Collection;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource
+public interface TareaRepository extends CrudRepository<Tarea, Long> {
+
+    Collection<Tarea> getTareasByCodigoProyecto(long codigoProyecto);
+}
