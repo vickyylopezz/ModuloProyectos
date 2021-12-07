@@ -1,6 +1,9 @@
 package com.aninfo.model;
 
+import org.apache.tomcat.jni.Local;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -12,19 +15,19 @@ public class Proyecto {
 
     private String nombre;
     private String liderDeProyecto;
-    private Estado estado;
-    private String fechaCreacion;
+    private String estado;
+    private LocalDateTime fechaCreacion;
     private String descripcion;
 
     public Proyecto() {
     }
 
-    public Proyecto(String nombre, String liderDeProyecto, String fechaCreacion, String descripcion) {
+    public Proyecto(String nombre, String liderDeProyecto, String descripcion) {
         this.nombre = nombre;
         this.liderDeProyecto = liderDeProyecto;
-        this.estado = Estado.CREADO;
+        this.estado = "CREADO";
         this.descripcion = descripcion;
-        this.fechaCreacion = fechaCreacion;
+        this.fechaCreacion = LocalDateTime.now();
 
     }
 
@@ -48,19 +51,19 @@ public class Proyecto {
         return liderDeProyecto;
     }
 
-    public void setEstado(Estado estado){
+    public void setEstado(String estado){
         this.estado = estado;
     }
 
-    public Estado getEstado(){
+    public String getEstado(){
         return estado;
     }
 
-    public void setFechaCreacion(String fechaCreacion){
+    public void setFechaCreacion(LocalDateTime fechaCreacion){
         this.fechaCreacion = fechaCreacion;
     }
 
-    public String getFechaCreacion(){
+    public LocalDateTime getFechaCreacion(){
         return fechaCreacion;
     }
 

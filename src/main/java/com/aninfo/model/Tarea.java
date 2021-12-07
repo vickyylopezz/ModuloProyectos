@@ -16,14 +16,14 @@ public class Tarea {
 
     private Long codigoProyecto;
     private String nombre;
-    private Estado estado;
+    private String estado;
     private String descripcion;
     private String personaAsignada;
 
     public Tarea() {
     }
 
-    public Tarea(Long codigoProyecto, String nombre, Estado estado, String descripcion, String personaAsignada) {
+    public Tarea(Long codigoProyecto, String nombre, String estado, String descripcion, String personaAsignada) {
         this.codigoProyecto = codigoProyecto;
         this.nombre = nombre;
         this.estado = estado;
@@ -53,11 +53,11 @@ public class Tarea {
         this.nombre = nombre;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

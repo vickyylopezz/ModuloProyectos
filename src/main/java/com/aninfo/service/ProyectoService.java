@@ -1,6 +1,5 @@
 package com.aninfo.service;
 
-import com.aninfo.model.Estado;
 import com.aninfo.model.Proyecto;
 import com.aninfo.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +37,34 @@ public class ProyectoService {
         proyectoRepository.deleteById(codigo);
     }
 
-    public Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String fechaCreacion, String descripcion, Estado estado) {
+    public Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String descripcion, String estado) {
         Proyecto proyecto = proyectoRepository.findProyectoByCodigo(codigoProyecto);
         proyecto.setNombre(nombre);
         proyecto.setLiderDeProyecto(liderDeProyecto);
-        proyecto.setFechaCreacion(fechaCreacion);
         proyecto.setDescripcion(descripcion);
         proyecto.setEstado(estado);
-
+        proyectoRepository.delete(proyecto);
+        proyectoRepository.save(proyecto);
         return proyecto;
+    }
+
+    public Boolean existeProyecto(Long codigo){
+        return proyectoRepository.existsById(codigo);
+    }
+
+    public Iterable<Proyecto> obtenerTodosLosProyectosConNombre(String nombre) {
+        return proyectoRepository.findAllByNombre(nombre);
+    }
+
+    public Iterable<Proyecto> obtenerTodosLosProyectosConEstado(String estado) {
+        return proyectoRepository.findAllByEstado(estado);
+    }
+
+    public void deleteAll() {
+        proyectoRepository.deleteAll();
+    }
+
+    public Iterable<Proyecto> obtenerTodosLosProyectosConLider(String lider) {
+        return proyectoRepository.findAllByLiderDeProyecto(lider);
     }
 }
