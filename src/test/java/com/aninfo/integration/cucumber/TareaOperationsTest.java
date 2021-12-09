@@ -97,7 +97,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @When("^Agrego las tareas$")
     public void agregoLasTareas() {
-        tareasObtenidas = obtenerTodasLasTareasDelProyecto(Long.valueOf(15));
+        tareasObtenidas = obtenerTodasLasTareasDelProyecto(15L);
     }
 
 
@@ -105,5 +105,79 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Then("^Las tareas deben pertenecer al proyecto$")
     public void lasTareasDebenPertenecerAlProyecto() {
         assertEquals(3, tareasObtenidas.spliterator().getExactSizeIfKnown());
+        eliminarTodasLasTareas();
+    }
+
+    @Given("^Que se quiere filtrar las tareas por nombre$")
+    public void queSeQuiereFiltrarLasTareasPorNombre() {
+        crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
+        crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
+        crearTarea(15L, "Tarea B", "Descripcio 3", "Manuela");
+        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+    }
+
+    @When("^Hago el filtrado de tareas por nombre$")
+    public void hagoElFiltradoPorNombre() {
+        tareasObtenidas = obtenerTodasLasTareasConNombre("Tarea A");
+    }
+
+    @Then("^Se me mostraran solo las tareas pedidas$")
+    public void seMeMostraranSoloLasTareasPedidas() {
+        assertEquals(tareasObtenidas.spliterator().getExactSizeIfKnown(),3);
+        eliminarTodasLasTareas();
+    }
+
+    @Given("^Que se quiere filtrar las tareas por estado$")
+    public void queSeQuiereFiltrarLasTareasPorEstado() {
+        tarea = crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
+        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"FINALIZADA");
+        tarea = crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
+        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
+        tarea = crearTarea(15L, "Tarea B", "Descripcio 3", "Manuela");
+        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
+        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+    }
+
+    @When("^Hago el filtrado de tareas por estado en curso$")
+    public void hagoElFiltradoDeTareasPorEstadoEnCurso() {
+        tareasObtenidas = obtenerTodasLasTareasConEstado("ENCURSO");
+    }
+
+    @Then("^Se me mostraran solo las tareas con estado en curso$")
+    public void seMeMostraranSoloLasTareasConEstadoEnCurso() {
+        assertEquals(tareasObtenidas.spliterator().getExactSizeIfKnown(),2);
+        eliminarTodasLasTareas();
+    }
+
+    @When("^Hago el filtrado de tareas por estado finalizada$")
+    public void hagoElFiltradoDeTareasPorEstadoFinalizada() {
+        tareasObtenidas = obtenerTodasLasTareasConEstado("FINALIZADA");
+    }
+
+    @Then("^Se me mostraran solo las tareas con estado finalizada$")
+    public void seMeMostraranSoloLasTareasConEstadoFinalizada() {
+        assertEquals(tareasObtenidas.spliterator().getExactSizeIfKnown(),1);
+        eliminarTodasLasTareas();
+    }
+
+    @Given("^Que se quiere filtrar las tareas por empleado asignado$")
+    public void queSeQuiereFiltrarLasTareasPorEmpleadoAsignado() {
+        crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
+        crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
+        crearTarea(15L, "Tarea B", "Descripcio 3", "Marta");
+        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+    }
+
+    @When("^Hago el filtrado de tareas por empleado asignado$")
+    public void hagoElFiltradoDeTareasPorEmpleadoAsignado() {
+        tareasObtenidas = obtenerTodasLasTareasConEmpleadoAsignado("Marta");
+    }
+
+
+
+    @Then("^Se me mostraran solo las tareas con el empleado asignado elegido$")
+    public void seMeMostraranSoloLasTareasConElEmpleadoAsignadoElegido() {
+        assertEquals(tareasObtenidas.spliterator().getExactSizeIfKnown(),2);
+        eliminarTodasLasTareas();
     }
 }

@@ -13,4 +13,10 @@ public interface TareaRepository extends CrudRepository<Tarea, Long> {
     Tarea findTareaByCodigoTarea(Long codigoTarea);
 
     Iterable<Tarea> findAllByCodigoProyecto(Long codigoProyecto);
+
+    Iterable<Tarea> findAllByNombre(String nombreTarea);
+
+    Iterable<Tarea> findAllByEstado(String estado);
+
+    Iterable<Tarea> findAllByPersonaAsignada(String empleado);
 }

@@ -59,4 +59,17 @@ public class TareaService {
     public Iterable<Tarea> obtenerTodasLasTareasConConCodigoProyecto(Long codigoProyecto) {
         return tareaRepository.findAllByCodigoProyecto(codigoProyecto);
     }
+
+    public Iterable<Tarea> obtenerTodasLasTareasConNombre(String nombreTarea) {
+        return tareaRepository.findAllByNombre(nombreTarea);
+    }
+
+    public Iterable<Tarea> obtenerTodasLasTareasConEstado(String estado) {
+        return tareaRepository.findAllByEstado(estado);
+    }
+
+    public Iterable<Tarea> obtenerTodasLasTareasConEmpleado(String empleado) {
+        return tareaRepository.findAllByPersonaAsignada(empleado);
+
+    }
 }

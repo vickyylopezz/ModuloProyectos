@@ -36,4 +36,17 @@ public class TareaIntegrationServiceTest {
     Iterable<Tarea> obtenerTodasLasTareasDelProyecto(Long codigoProyecto) {
         return tareaService.obtenerTodasLasTareasConConCodigoProyecto(codigoProyecto);
     }
+
+    Iterable<Tarea> obtenerTodasLasTareasConNombre(String nombreTarea) {
+        return tareaService.obtenerTodasLasTareasConNombre(nombreTarea);
+    }
+
+    Iterable<Tarea> obtenerTodasLasTareasConEstado(String estado) {
+        return tareaService.obtenerTodasLasTareasConEstado(estado);
+    }
+
+    Iterable<Tarea> obtenerTodasLasTareasConEmpleadoAsignado(String empleado) {
+        return tareaService.obtenerTodasLasTareasConEmpleado(empleado);
+
+    }
 }

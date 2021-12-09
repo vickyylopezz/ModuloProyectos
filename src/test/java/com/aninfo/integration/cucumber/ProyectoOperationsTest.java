@@ -162,60 +162,6 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         eliminarTodosLosProyectos();
     }
 
-    /*@Given("^Que se quiere modificar un proyecto$")
-    public void queSeQuiereModificarUnProyecto() {
-        this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
-        this.descripcion = "Desarrollo de nueva API de Psa";
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
-    }
-
-    @When("^Modifico el nombre$")
-    public void modificoElNombreYElEstado() {
-        nombreProyecto = "ProyectoB";
-        proyecto = modificarProyecto(proyecto.getCodigo(), nombreProyecto, proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), proyecto.getEstado());
-    }
-
-    @When("^Modifico el estado$")
-    public void modificoElEstado() {
-        estado = "ENCURSO";
-        proyecto = modificarProyecto(proyecto.getCodigo(), proyecto.getNombre(), proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), estado);
-
-    }
-
-    @When("^Modifico el lider$")
-    public void modificoElLider() {
-        liderProyecto = "Claudia Suarez";
-        proyecto = modificarProyecto(proyecto.getCodigo(), proyecto.getNombre(), liderProyecto, proyecto.getDescripcion(), proyecto.getEstado());
-
-    }
-
-    @When("^Modifico la descripcion$")
-    public void modificoLaDescripcion() {
-        descripcion = "Desarrollo de aplicacion de encuestas";
-        proyecto = modificarProyecto(proyecto.getCodigo(), proyecto.getNombre(), proyecto.getLiderDeProyecto(), descripcion, proyecto.getEstado());
-
-    }
-
-    @Then("^Se me actualizara el nombre del mismo$")
-    public void seMeActualizaraElNombreDelMismo() {
-        assertEquals(this.nombreProyecto, proyecto.getNombre());
-    }
-
-    @Then("^Se me actualizara el estado del mismo$")
-    public void seMeActualizaraElEstadoDelMismo() {
-        assertEquals(this.estado, proyecto.getEstado());
-    }
-
-    @Then("^Se me actualizara el lider del mismo$")
-    public void seMeActualizaraElLiderDelMismo() {
-        assertEquals(this.liderProyecto, proyecto.getLiderDeProyecto());
-    }
-
-    @Then("^Se me actualizara la descripcion del mismo$")
-    public void seMeActualizaraLaDescripcionDelMismo() {
-        assertEquals(descripcion, proyecto.getDescripcion());
-    }*/
 
 
 
