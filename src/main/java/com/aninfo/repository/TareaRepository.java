@@ -9,4 +9,8 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface TareaRepository extends CrudRepository<Tarea, Long> {
 
     Collection<Tarea> getTareasByCodigoProyecto(long codigoProyecto);
+
+    Tarea findTareaByCodigoTarea(Long codigoTarea);
+
+    Iterable<Tarea> findAllByCodigoProyecto(Long codigoProyecto);
 }

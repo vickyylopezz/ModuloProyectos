@@ -23,10 +23,10 @@ public class Tarea {
     public Tarea() {
     }
 
-    public Tarea(Long codigoProyecto, String nombre, String estado, String descripcion, String personaAsignada) {
+    public Tarea(Long codigoProyecto, String nombre, String descripcion, String personaAsignada) {
         this.codigoProyecto = codigoProyecto;
         this.nombre = nombre;
-        this.estado = estado;
+        this.estado = "CREADA";
         this.descripcion = descripcion;
         this.personaAsignada = personaAsignada;
     }

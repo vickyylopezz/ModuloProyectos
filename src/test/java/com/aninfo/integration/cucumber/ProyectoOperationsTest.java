@@ -33,8 +33,8 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
     }
 
-    @Then("^Se carga en el sistema con los datos correspondientes$")
-    public void seCargaEnElSistemaConLosDatosCorrespondientes() {
+    @Then("^Se carga el proyecto en el sistema con los datos correspondientes$")
+    public void seCargaElProyectoEnElSistemaConLosDatosCorrespondientes() {
         assertEquals(this.nombreProyecto, proyecto.getNombre());
         assertEquals(this.liderProyecto, proyecto.getLiderDeProyecto());
         assertEquals("CREADO", proyecto.getEstado());

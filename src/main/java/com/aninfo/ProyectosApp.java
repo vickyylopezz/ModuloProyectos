@@ -61,7 +61,7 @@ public class ProyectosApp {
 	public ResponseEntity<Proyecto> updateProyecto(@RequestBody Proyecto proyecto, @PathVariable Long codigo) {
 		Optional<Proyecto> proyectoOptional = proyectoService.findById(codigo);
 
-		if (!proyectoOptional.isPresent()) {
+		if (proyectoOptional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		proyecto.setCodigo(codigo);
@@ -79,13 +79,13 @@ public class ProyectosApp {
 	@PostMapping("/proyectos/{codigo}/tareas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Tarea createTarea(@RequestBody Tarea tarea) {
-		return tareaService.createTarea(tarea);
+		return tareaService.crearTarea(tarea);
 	}
 
 	//Get tareas de un proyecto especifico
 	@GetMapping("/proyectos/{codigo}/tareas")
-	public Collection<Tarea> getTareas(@PathVariable Long codigoProyecto) {
-		return tareaService.getTareas(codigoProyecto);
+	public Collection<Tarea> getTareas(@PathVariable Long codigo) {
+		return tareaService.getTareas(codigo);
 	}
 
 	//Borrar una tarea
@@ -100,7 +100,7 @@ public class ProyectosApp {
 	public ResponseEntity<Tarea> updateTarea(@RequestBody Tarea tarea, @PathVariable Long codigoTarea) {
 		Optional<Tarea> tareaOptional = tareaService.findById(codigoTarea);
 
-		if (!tareaOptional.isPresent()) {
+		if (tareaOptional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
 		tarea.setCodigoTarea(codigoTarea);

@@ -1,5 +1,6 @@
 package com.aninfo.service;
 
+import com.aninfo.model.Proyecto;
 import com.aninfo.model.Tarea;
 import com.aninfo.repository.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class TareaService {
         return tareaRepository.getTareasByCodigoProyecto(codigoProyecto);
     }
 
-    public Tarea createTarea(Tarea tarea) {
+    public Tarea crearTarea(Tarea tarea) {
         return tareaRepository.save(tarea);
     }
 
@@ -34,5 +35,28 @@ public class TareaService {
 
     public void save(Tarea tarea) {
         tareaRepository.save(tarea);
+    }
+
+
+    public void deleteAll() { tareaRepository.deleteAll();
+    }
+
+    public boolean existeProyecto(Long codigoTarea) { return tareaRepository.existsById(codigoTarea);
+    }
+
+    public Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, String personaAsignada, String estado) {
+        Tarea tarea = tareaRepository.findTareaByCodigoTarea(codigoTarea);
+        tarea.setCodigoProyecto(codigoProyecto);
+        tarea.setNombre(nombreTarea);
+        tarea.setDescripcion(descripcion);
+        tarea.setPersonaAsignada(personaAsignada);
+        tarea.setEstado(estado);
+        tareaRepository.delete(tarea);
+        tareaRepository.save(tarea);
+        return tarea;
+    }
+
+    public Iterable<Tarea> obtenerTodasLasTareasConConCodigoProyecto(Long codigoProyecto) {
+        return tareaRepository.findAllByCodigoProyecto(codigoProyecto);
     }
 }
