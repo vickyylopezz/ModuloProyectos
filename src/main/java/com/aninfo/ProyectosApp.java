@@ -76,7 +76,7 @@ public class ProyectosApp {
 	}
 
 	//Crear tarea
-	@PostMapping("/proyectos/{codigo}/tareas")
+	@PostMapping("/proyectos/{codigoProyecto}/tareas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Tarea createTarea(@RequestBody Tarea tarea) {
 		return tareaService.crearTarea(tarea);
@@ -89,14 +89,14 @@ public class ProyectosApp {
 	}
 
 	//Borrar una tarea
-	@DeleteMapping("/proyectos/{codigo}/tareas/{codigoTarea}")
-	public void deleteTarea(@PathVariable Long codigoTarea) {
+	@DeleteMapping("/proyectos/{codigoProyecto}/tareas/{codigoTarea}")
+	public void deleteTarea(@PathVariable Long codigoTarea, @PathVariable String codigoProyecto) {
 
 		tareaService.deleteById(codigoTarea);
 	}
 
 	//Editar una tarea
-	@PutMapping("/proyectos/{codigo}/tareas/{codigoTarea}")
+	@PutMapping("/proyectos/{codigoProyecto}/tareas/{codigoTarea}")
 	public ResponseEntity<Tarea> updateTarea(@RequestBody Tarea tarea, @PathVariable Long codigoTarea) {
 		Optional<Tarea> tareaOptional = tareaService.findById(codigoTarea);
 
@@ -109,8 +109,8 @@ public class ProyectosApp {
 	}
 
 	//Get de una tarea por su codigo
-	@GetMapping("/proyectos/{codigo}/tareas/{codigoTarea}")
-	public ResponseEntity<Tarea> getTarea(@PathVariable Long codigoTarea) {
+	@GetMapping("/proyectos/{codigoProyecto}/tareas/{codigoTarea}")
+	public ResponseEntity<Tarea> getTarea(@PathVariable Long codigoTarea, @PathVariable String codigoProyecto) {
 		Optional<Tarea> tareaOptional = tareaService.findById(codigoTarea);
 		return ResponseEntity.of(tareaOptional);
 	}
