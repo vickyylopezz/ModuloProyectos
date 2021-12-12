@@ -11,6 +11,11 @@ Feature: Proyectos operations
     When Elimino un proyecto
     Then Se eliminara el proyecto del sistema
 
+  Scenario: Eliminar un proyecto finalizado
+    Given Que se quiere eliminar un proyecto finalizado
+    When Elimino un proyecto
+    Then No se eliminara el proyecto del sistema
+
   Scenario: Editar datos de un proyecto
     Given Que se quiere editar un proyecto
     When Edito el proyecto

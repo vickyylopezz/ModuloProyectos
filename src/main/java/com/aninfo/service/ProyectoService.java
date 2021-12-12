@@ -1,5 +1,6 @@
 package com.aninfo.service;
 
+import com.aninfo.exceptions.ProyectoFinalizadoException;
 import com.aninfo.model.Proyecto;
 import com.aninfo.repository.ProyectoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,10 @@ public class ProyectoService {
     }
 
     public void deleteById(Long codigo) {
+        Proyecto proyecto = proyectoRepository.findProyectoByCodigo(codigo);
+        if(proyecto.getEstado().equals("FINALIZADO")){
+            throw new ProyectoFinalizadoException("No se puede eliminar un proyecto finalizado");
+        }
         proyectoRepository.deleteById(codigo);
     }
 
@@ -43,9 +48,9 @@ public class ProyectoService {
         proyecto.setLiderDeProyecto(liderDeProyecto);
         proyecto.setDescripcion(descripcion);
         proyecto.setEstado(estado);
-        proyectoRepository.delete(proyecto);
-        proyectoRepository.save(proyecto);
-        return proyecto;
+        proyectoRepository.deleteById(proyecto.getCodigo());
+
+        return proyectoRepository.save(proyecto);
     }
 
     public Boolean existeProyecto(Long codigo){

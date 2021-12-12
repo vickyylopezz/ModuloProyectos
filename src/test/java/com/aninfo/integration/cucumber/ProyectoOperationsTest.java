@@ -1,5 +1,6 @@
 package com.aninfo.integration.cucumber;
 
+import com.aninfo.exceptions.ProyectoFinalizadoException;
 import com.aninfo.model.Proyecto;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -20,6 +21,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     private String descripcion;
     private String estado;
     private Iterable<Proyecto> proyectosObtenidos;
+    private ProyectoFinalizadoException proyectoFinalizado;
 
     @Given("^Que se quiere crear un proyecto$")
     public void queSeQuiereCrearUnProyecto() {
@@ -50,14 +52,34 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
     }
 
+    @Given("^Que se quiere eliminar un proyecto finalizado$")
+    public void queSeQuiereEliminarUnProyectoFinalizado() {
+        this.nombreProyecto = "Proyecto A";
+        this.liderProyecto = "Carlos Zarate";
+        this.descripcion = "Desarrollo de nueva API de Psa";
+        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
+    }
+
     @When("^Elimino un proyecto$")
     public void eliminoUnProyecto() {
-        eliminarProyecto(proyecto.getCodigo());
+        try {
+            eliminarProyecto(proyecto.getCodigo());
+
+        } catch (ProyectoFinalizadoException proyectoFinalizado) {
+            this.proyectoFinalizado = proyectoFinalizado;
+        }
     }
 
     @Then("^Se eliminara el proyecto del sistema$")
     public void seEliminaraElProyectoDelSistema() {
         assertEquals(false, existeProyecto(proyecto.getCodigo()));
+        eliminarTodosLosProyectos();
+    }
+
+    @Then("^No se eliminara el proyecto del sistema$")
+    public void noSeEliminaraElProyectoDelSistema() {
+        assertNotNull(proyectoFinalizado);
         eliminarTodosLosProyectos();
     }
 
@@ -161,8 +183,6 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         assertEquals(proyectosObtenidos.spliterator().getExactSizeIfKnown(),3);
         eliminarTodosLosProyectos();
     }
-
-
 
 
 
