@@ -80,6 +80,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     @Then("^No se eliminara el proyecto del sistema$")
     public void noSeEliminaraElProyectoDelSistema() {
         assertNotNull(proyectoFinalizado);
+        proyectoFinalizado = null;
         eliminarTodosLosProyectos();
     }
 
@@ -91,12 +92,26 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
     }
 
+    @Given("^Que se quiere editar un proyecto finalizado$")
+    public void queSeQuiereEditarUnProyectoFinalizado() {
+        this.nombreProyecto = "Proyecto A";
+        this.liderProyecto = "Carlos Zarate";
+        this.descripcion = "Desarrollo de nueva API de Psa";
+        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
+    }
+
     @When("^Edito el proyecto$")
     public void editoElProyecto() {
         nombreProyecto = "ProyectoB";
         liderProyecto = "Claudia Suarez";
         estado = "ENCURSO";
-        proyecto = modificarProyecto(proyecto.getCodigo(), nombreProyecto, liderProyecto, proyecto.getDescripcion(), estado);
+
+        try{
+            proyecto = modificarProyecto(proyecto.getCodigo(), nombreProyecto, liderProyecto, proyecto.getDescripcion(), estado);
+        } catch (ProyectoFinalizadoException proyectoFinalizado){
+            this.proyectoFinalizado = proyectoFinalizado;
+        }
     }
 
     @Then("^Se me actualizara la informacion del mismo$")
@@ -107,6 +122,14 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         assertEquals(descripcion, proyecto.getDescripcion());
         eliminarTodosLosProyectos();
     }
+
+    @Then("^No se me actualizara la informacion del mismo$")
+    public void noSeMeActualizaraLaInformacionDelMismo() {
+        assertNotNull(proyectoFinalizado);
+        proyectoFinalizado = null;
+        eliminarTodosLosProyectos();
+    }
+
 
     @Given("^Que se quiere filtrar los proyectos por nombre$")
     public void queSeQuiereFiltrarLosProyectosPorNombre() {

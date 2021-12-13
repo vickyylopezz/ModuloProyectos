@@ -21,6 +21,11 @@ Feature: Proyectos operations
     When Edito el proyecto
     Then Se me actualizara la informacion del mismo
 
+  Scenario: Editar datos de un proyecto finalizado
+    Given Que se quiere editar un proyecto finalizado
+    When Edito el proyecto
+    Then No se me actualizara la informacion del mismo
+
   Scenario: Consultar todos los proyectos con el mismo nombre
     Given Que se quiere filtrar los proyectos por nombre
     When Hago el filtrado por nombre

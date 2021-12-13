@@ -44,6 +44,11 @@ public class ProyectoService {
 
     public Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String descripcion, String estado) {
         Proyecto proyecto = proyectoRepository.findProyectoByCodigo(codigoProyecto);
+
+        if(proyecto.getEstado().equals("FINALIZADO")){
+            throw new ProyectoFinalizadoException("No se puede modificar un proyecto finalizado");
+        }
+
         proyecto.setNombre(nombre);
         proyecto.setLiderDeProyecto(liderDeProyecto);
         proyecto.setDescripcion(descripcion);

@@ -11,10 +11,20 @@ Feature: Tareas operations
     When Elimino una tarea
     Then Se eliminara la tarea del sistema
 
+  Scenario: Eliminar una tarea finalizada
+    Given Que se quiere eliminar una tarea finalizada
+    When Elimino una tarea
+    Then No se eliminara la tarea del sistema
+
   Scenario: Editar datos de una tarea
     Given Que se quiere editar una tarea
     When Edito la tarea
     Then Se me actualizara la informacion de la misma
+
+  Scenario: Editar datos de una tarea finalizada
+    Given Que se quiere editar una tarea finalizada
+    When Edito la tarea
+    Then No se me actualizara la informacion de la misma
 
   Scenario: Agregar tareas a un proyecto
     Given Que se quiere agregar tareas a un mismo proyecto

@@ -26,7 +26,7 @@ public class TareaIntegrationServiceTest {
     void eliminarTarea(Long codigoTarea) { tareaService.deleteById(codigoTarea);
     }
 
-    boolean existeTarea(Long codigoTarea) { return tareaService.existeProyecto(codigoTarea);
+    boolean existeTarea(Long codigoTarea) { return tareaService.existeTarea(codigoTarea);
     }
 
     Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, String personaAsignada, String estado) {

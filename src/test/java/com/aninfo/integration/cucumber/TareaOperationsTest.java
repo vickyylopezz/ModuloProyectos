@@ -1,12 +1,13 @@
 package com.aninfo.integration.cucumber;
 
+import com.aninfo.exceptions.TareaFinalizadaException;
+import com.aninfo.model.Proyecto;
 import com.aninfo.model.Tarea;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
@@ -17,6 +18,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     private String personaAsignada;
     private String estado;
     private Iterable<Tarea> tareasObtenidas;
+    private TareaFinalizadaException tareaFinalizada;
 
     @Given("^Que se quiere crear una tarea$")
     public void queSeQuiereCrearUnaTarea() {
@@ -51,14 +53,36 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
     }
 
+    @Given("^Que se quiere eliminar una tarea finalizada$")
+    public void queSeQuiereEliminarUnaTareaFinalizada() {
+        this.nombreTarea = "Tarea A";
+        this.codigoProyecto = 1L;
+        this.descripcion = "Descripcion 1";
+        this.personaAsignada = "Marcos Cesar";
+        tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
+        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+
+    }
+
     @When("^Elimino una tarea$")
     public void eliminoUnaTarea() {
-        eliminarTarea(tarea.getCodigoTarea());
+        try{
+            eliminarTarea(tarea.getCodigoTarea());
+        } catch (TareaFinalizadaException tareaFinalizada){
+            this.tareaFinalizada = tareaFinalizada;
+        }
     }
 
     @Then("^Se eliminara la tarea del sistema$")
     public void seEliminaraLaTareaDelSistema() {
         assertFalse(existeTarea(tarea.getCodigoTarea()));
+    }
+
+    @Then("^No se eliminara la tarea del sistema$")
+    public void noSeEliminaraLaTareaDelSistema() {
+        assertNotNull(tareaFinalizada);
+        tareaFinalizada = null;
+        eliminarTodasLasTareas();
     }
 
     @Given("^Que se quiere editar una tarea$")
@@ -70,11 +94,25 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
     }
 
+    @Given("^Que se quiere editar una tarea finalizada$")
+    public void queSeQuiereEditarUnaTareaFinalizada() {
+        this.nombreTarea = "Tarea A";
+        this.codigoProyecto = 1L;
+        this.descripcion = "Descripcion 1";
+        this.personaAsignada = "Marcos Cesar";
+        tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
+        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+    }
+
     @When("^Edito la tarea$")
     public void editoLaTarea() {
         nombreTarea = "Tarea A2";
         estado = "ENCURSO";
-        tarea = modificarTarea(tarea.getCodigoTarea(),codigoProyecto , nombreTarea, descripcion, personaAsignada, estado);
+        try {
+            tarea = modificarTarea(tarea.getCodigoTarea(),codigoProyecto , nombreTarea, descripcion, personaAsignada, estado);
+        } catch(TareaFinalizadaException tareaFinalizada){
+            this.tareaFinalizada = tareaFinalizada;
+        }
     }
 
     @Then("^Se me actualizara la informacion de la misma$")
@@ -84,6 +122,13 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         assertEquals(descripcion, tarea.getDescripcion());
         assertEquals(this.personaAsignada, tarea.getPersonaAsignada());
         assertEquals(this.estado, tarea.getEstado());
+        eliminarTodasLasTareas();
+    }
+
+    @Then("^No se me actualizara la informacion de la misma$")
+    public void noSeMeActualizaraLaInformacionDeLaMisma() {
+        assertNotNull(tareaFinalizada);
+        tareaFinalizada = null;
         eliminarTodasLasTareas();
     }
 
@@ -99,8 +144,6 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     public void agregoLasTareas() {
         tareasObtenidas = obtenerTodasLasTareasDelProyecto(15L);
     }
-
-
 
     @Then("^Las tareas deben pertenecer al proyecto$")
     public void lasTareasDebenPertenecerAlProyecto() {
@@ -180,4 +223,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         assertEquals(tareasObtenidas.spliterator().getExactSizeIfKnown(),2);
         eliminarTodasLasTareas();
     }
+
+
+
 }
