@@ -7,7 +7,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface ProyectoRepository extends CrudRepository<Proyecto, Long> {
 
-    Proyecto findProyectoByCodigo(Long codigo);
+    Proyecto findProyectoById(Long codigo);
 
     Iterable<Proyecto> findAllByNombre(String nombre);
 

@@ -1,17 +1,14 @@
 package com.aninfo.model;
 
-import org.apache.tomcat.jni.Local;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long codigo;
+    private Long id;
 
     private String nombre;
     private String liderDeProyecto;
@@ -31,9 +28,9 @@ public class Proyecto {
 
     }
 
-    public Long getCodigo() { return codigo; }
+    public Long getId() { return id; }
 
-    public void setCodigo(Long codigo) { this.codigo = codigo; }
+    public void setId(Long codigo) { this.id = codigo; }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

@@ -64,7 +64,7 @@ public class ProyectosApp {
 		if (proyectoOptional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		proyecto.setCodigo(codigo);
+		proyecto.setId(codigo);
 		proyectoService.save(proyecto);
 		return ResponseEntity.noContent().build();
 	}

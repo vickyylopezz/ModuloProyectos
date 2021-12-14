@@ -5,11 +5,6 @@ import com.aninfo.model.Proyecto;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -58,13 +53,13 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         this.liderProyecto = "Carlos Zarate";
         this.descripcion = "Desarrollo de nueva API de Psa";
         proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
-        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
+        proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
     }
 
     @When("^Elimino un proyecto$")
     public void eliminoUnProyecto() {
         try {
-            eliminarProyecto(proyecto.getCodigo());
+            eliminarProyecto(proyecto.getId());
 
         } catch (ProyectoFinalizadoException proyectoFinalizado) {
             this.proyectoFinalizado = proyectoFinalizado;
@@ -73,7 +68,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
 
     @Then("^Se eliminara el proyecto del sistema$")
     public void seEliminaraElProyectoDelSistema() {
-        assertEquals(false, existeProyecto(proyecto.getCodigo()));
+        assertEquals(false, existeProyecto(proyecto.getId()));
         eliminarTodosLosProyectos();
     }
 
@@ -98,7 +93,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         this.liderProyecto = "Carlos Zarate";
         this.descripcion = "Desarrollo de nueva API de Psa";
         proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
-        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
+        proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
     }
 
     @When("^Edito el proyecto$")
@@ -108,7 +103,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         estado = "ENCURSO";
 
         try{
-            proyecto = modificarProyecto(proyecto.getCodigo(), nombreProyecto, liderProyecto, proyecto.getDescripcion(), estado);
+            proyecto = modificarProyecto(proyecto.getId(), nombreProyecto, liderProyecto, proyecto.getDescripcion(), estado);
         } catch (ProyectoFinalizadoException proyectoFinalizado){
             this.proyectoFinalizado = proyectoFinalizado;
         }
@@ -154,11 +149,11 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     @Given("^Que se quiere filtrar los proyectos por estado$")
     public void queSeQuiereFiltrarLosProyectosPorEstado() {
         proyecto = crearProyecto("ProyectoA", "Carlos","Descripcion1");
-        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
+        proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
         proyecto = crearProyecto("ProyectoA", "Marcela","Descripcion2");
-        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
+        proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
         proyecto = crearProyecto("ProyectoA", "Juana","Descripcion3");
-        proyecto = modificarProyecto(proyecto.getCodigo(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"FINALIZADO");
+        proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"FINALIZADO");
         crearProyecto("ProyectoB", "Claudio","Descripcion4");
         crearProyecto("ProyectoC", "Juan","Descripcion5");
     }

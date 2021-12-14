@@ -35,7 +35,7 @@ public class ProyectoService {
     }
 
     public void deleteById(Long codigo) {
-        Proyecto proyecto = proyectoRepository.findProyectoByCodigo(codigo);
+        Proyecto proyecto = proyectoRepository.findProyectoById(codigo);
         if(proyecto.getEstado().equals("FINALIZADO")){
             throw new ProyectoFinalizadoException("No se puede eliminar un proyecto finalizado");
         }
@@ -43,7 +43,7 @@ public class ProyectoService {
     }
 
     public Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String descripcion, String estado) {
-        Proyecto proyecto = proyectoRepository.findProyectoByCodigo(codigoProyecto);
+        Proyecto proyecto = proyectoRepository.findProyectoById(codigoProyecto);
 
         if(proyecto.getEstado().equals("FINALIZADO")){
             throw new ProyectoFinalizadoException("No se puede modificar un proyecto finalizado");
@@ -53,7 +53,7 @@ public class ProyectoService {
         proyecto.setLiderDeProyecto(liderDeProyecto);
         proyecto.setDescripcion(descripcion);
         proyecto.setEstado(estado);
-        proyectoRepository.deleteById(proyecto.getCodigo());
+        proyectoRepository.deleteById(proyecto.getId());
 
         return proyectoRepository.save(proyecto);
     }
@@ -76,5 +76,10 @@ public class ProyectoService {
 
     public Iterable<Proyecto> obtenerTodosLosProyectosConLider(String lider) {
         return proyectoRepository.findAllByLiderDeProyecto(lider);
+    }
+
+    public boolean proyectoFinalizado(Long codigo){
+        return proyectoRepository.findProyectoById(codigo).getEstado().equals("FINALIZADO");
+
     }
 }

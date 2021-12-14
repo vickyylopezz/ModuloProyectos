@@ -8,7 +8,6 @@ import com.aninfo.repository.ProyectoRepository;
 import com.aninfo.repository.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -26,9 +25,9 @@ public class TareaService {
     }
 
     public Tarea crearTarea(Tarea tarea) {
-        //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
+        /*Proyecto proyecto = proyectoRepository.findProyectoById(tarea.getCodigoProyecto());
 
-        /*if(proyecto.getEstado().equals("FINALIZADO")){
+        if(proyecto.getEstado().equals("FINALIZADO")){
             throw new ProyectoFinalizadoException("No se puede agregar una tarea a un proyecto finalizado");
         }*/
 
