@@ -1,8 +1,6 @@
 package com.aninfo.service;
 
-import com.aninfo.exceptions.ProyectoFinalizadoException;
 import com.aninfo.exceptions.TareaFinalizadaException;
-import com.aninfo.model.Proyecto;
 import com.aninfo.model.Tarea;
 import com.aninfo.repository.ProyectoRepository;
 import com.aninfo.repository.TareaRepository;
@@ -35,7 +33,7 @@ public class TareaService {
     }
 
     public void deleteById(Long codigoTarea) {
-        Tarea tarea = tareaRepository.findTareaByCodigoTarea(codigoTarea);
+        Tarea tarea = tareaRepository.findTareaById(codigoTarea);
         //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
 
         /*if(proyecto.getEstado().equals("FINALIZADO")){
@@ -64,7 +62,7 @@ public class TareaService {
     }
 
     public Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, String personaAsignada, String estado) {
-        Tarea tarea = tareaRepository.findTareaByCodigoTarea(codigoTarea);
+        Tarea tarea = tareaRepository.findTareaById(codigoTarea);
         //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
 
         /*if(proyecto.getEstado().equals("FINALIZADO")){
@@ -80,7 +78,7 @@ public class TareaService {
         tarea.setDescripcion(descripcion);
         tarea.setPersonaAsignada(personaAsignada);
         tarea.setEstado(estado);
-        tareaRepository.deleteById(tarea.getCodigoTarea());
+        tareaRepository.deleteById(tarea.getId());
 
         return tareaRepository.save(tarea);
     }

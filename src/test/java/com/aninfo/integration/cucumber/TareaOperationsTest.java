@@ -1,13 +1,10 @@
 package com.aninfo.integration.cucumber;
 
 import com.aninfo.exceptions.TareaFinalizadaException;
-import com.aninfo.model.Proyecto;
 import com.aninfo.model.Tarea;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -62,14 +59,14 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.descripcion = "Descripcion 1";
         this.personaAsignada = "Marcos Cesar";
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
-        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
 
     }
 
     @When("^Elimino una tarea$")
     public void eliminoUnaTarea() {
         try{
-            eliminarTarea(tarea.getCodigoTarea());
+            eliminarTarea(tarea.getId());
         } catch (TareaFinalizadaException tareaFinalizada){
             this.tareaFinalizada = tareaFinalizada;
         }
@@ -77,7 +74,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @Then("^Se eliminara la tarea del sistema$")
     public void seEliminaraLaTareaDelSistema() {
-        assertFalse(existeTarea(tarea.getCodigoTarea()));
+        assertFalse(existeTarea(tarea.getId()));
     }
 
     @Then("^No se eliminara la tarea del sistema$")
@@ -103,7 +100,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.descripcion = "Descripcion 1";
         this.personaAsignada = "Marcos Cesar";
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
-        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
     }
 
     @When("^Edito la tarea$")
@@ -111,7 +108,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         nombreTarea = "Tarea A2";
         estado = "ENCURSO";
         try {
-            tarea = modificarTarea(tarea.getCodigoTarea(),codigoProyecto , nombreTarea, descripcion, personaAsignada, estado);
+            tarea = modificarTarea(tarea.getId(),codigoProyecto , nombreTarea, descripcion, personaAsignada, estado);
         } catch(TareaFinalizadaException tareaFinalizada){
             this.tareaFinalizada = tareaFinalizada;
         }
@@ -175,11 +172,11 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere filtrar las tareas por estado$")
     public void queSeQuiereFiltrarLasTareasPorEstado() {
         tarea = crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
-        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"FINALIZADA");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"FINALIZADA");
         tarea = crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
-        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
         tarea = crearTarea(15L, "Tarea B", "Descripcio 3", "Manuela");
-        tarea = modificarTarea(tarea.getCodigoTarea(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
         crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
     }
 

@@ -10,7 +10,7 @@ public interface TareaRepository extends CrudRepository<Tarea, Long> {
 
     Collection<Tarea> getTareasByCodigoProyecto(long codigoProyecto);
 
-    Tarea findTareaByCodigoTarea(Long codigoTarea);
+    Tarea findTareaById(Long codigoTarea);
 
     Iterable<Tarea> findAllByCodigoProyecto(Long codigoProyecto);
 

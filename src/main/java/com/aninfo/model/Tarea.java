@@ -1,7 +1,5 @@
 package com.aninfo.model;
 
-import org.hibernate.boot.model.source.spi.IdentifierSource;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,7 +10,7 @@ public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long codigoTarea;
+    private Long id;
 
     private Long codigoProyecto;
     private String nombre;
@@ -31,12 +29,12 @@ public class Tarea {
         this.personaAsignada = personaAsignada;
     }
 
-    public Long getCodigoTarea() {
-        return codigoTarea;
+    public Long getId() {
+        return id;
     }
 
-    public void setCodigoTarea(Long codigoTarea) {
-        this.codigoTarea = codigoTarea;
+    public void setId(Long codigoTarea) {
+        this.id = codigoTarea;
     }
 
     public Long getCodigoProyecto() {

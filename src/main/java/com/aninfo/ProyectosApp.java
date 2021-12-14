@@ -103,7 +103,7 @@ public class ProyectosApp {
 		if (tareaOptional.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
-		tarea.setCodigoTarea(codigoTarea);
+		tarea.setId(codigoTarea);
 		tareaService.save(tarea);
 		return ResponseEntity.noContent().build();
 	}
