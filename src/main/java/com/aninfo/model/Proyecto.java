@@ -25,7 +25,7 @@ public class Proyecto {
 
     public String getTodayDate() {
 
-            SimpleDateFormat dtf = new SimpleDateFormat("dd MMMMM yyyy");
+            SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
             Calendar calendar = Calendar.getInstance();
 
             Date dateObj = calendar.getTime();
