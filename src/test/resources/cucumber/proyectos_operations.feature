@@ -46,4 +46,6 @@ Feature: Proyectos operations
     When Hago el filtrado por lider
     Then Se me mostraran solo los proyectos con el lider elegido
 
+  Scenario: fecha
+     Given que se quiere fecha
 

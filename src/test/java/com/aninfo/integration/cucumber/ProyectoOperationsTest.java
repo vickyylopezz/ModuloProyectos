@@ -203,5 +203,9 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     }
 
 
-
+    @Given("^que se quiere fecha$")
+    public void queSeQuiereFecha() {
+        proyecto = crearProyecto("ProyectoA", 25,"Descripcion1");
+        System.out.println(proyecto.getFechaCreacion());
+    }
 }

@@ -1,7 +1,11 @@
 package com.aninfo.model;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 public class Proyecto {
@@ -13,10 +17,19 @@ public class Proyecto {
     private String nombre;
     private Integer legajoLider;
     private String estado;
-    private LocalDateTime fechaCreacion;
+    private String fechaCreacion;
     private String descripcion;
 
     public Proyecto() {
+    }
+
+    public String getTodayDate() {
+
+            SimpleDateFormat dtf = new SimpleDateFormat("dd MMMMM yyyy");
+            Calendar calendar = Calendar.getInstance();
+
+            Date dateObj = calendar.getTime();
+            return dtf.format(dateObj);
     }
 
     public Proyecto(String nombre, Integer liderDeProyecto, String descripcion) {
@@ -24,7 +37,8 @@ public class Proyecto {
         this.legajoLider = liderDeProyecto;
         this.estado = "CREADO";
         this.descripcion = descripcion;
-        this.fechaCreacion = LocalDateTime.now();
+        this.fechaCreacion = getTodayDate();
+
 
     }
 
@@ -56,11 +70,11 @@ public class Proyecto {
         return estado;
     }
 
-    public void setFechaCreacion(LocalDateTime fechaCreacion){
+    public void setFechaCreacion(String fechaCreacion){
         this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDateTime getFechaCreacion(){
+    public String getFechaCreacion(){
         return fechaCreacion;
     }
 
