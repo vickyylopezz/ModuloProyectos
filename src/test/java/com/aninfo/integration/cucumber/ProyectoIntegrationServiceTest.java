@@ -3,6 +3,7 @@ package com.aninfo.integration.cucumber;
 import com.aninfo.ProyectosApp;
 import com.aninfo.model.Proyecto;
 import com.aninfo.service.ProyectoService;
+import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -18,7 +19,7 @@ public class ProyectoIntegrationServiceTest {
     ProyectoService proyectoService;
 
     Proyecto crearProyecto(String nombre,
-                           String liderDeProyecto,
+                           Integer liderDeProyecto,
                            String descripcion) {
         return proyectoService.crearProyecto(new Proyecto(nombre, liderDeProyecto, descripcion));
     }
@@ -27,7 +28,7 @@ public class ProyectoIntegrationServiceTest {
         proyectoService.deleteById(codigoProyecto);
     }
 
-    Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String descripcion, String estado){
+    Proyecto modificarProyecto(Long codigoProyecto, String nombre, Integer liderDeProyecto, String descripcion, String estado){
         return proyectoService.modificarProyecto(codigoProyecto,nombre,liderDeProyecto,descripcion,estado);
     }
 
@@ -47,7 +48,7 @@ public class ProyectoIntegrationServiceTest {
         proyectoService.deleteAll();
     }
 
-    Iterable<Proyecto> obtenerTodosLosProyectosConLider(String lider) {
+    Iterable<Proyecto> obtenerTodosLosProyectosConLider(Integer lider) {
         return proyectoService.obtenerTodosLosProyectosConLider(lider);
     }
 }

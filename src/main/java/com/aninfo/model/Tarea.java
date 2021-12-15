@@ -16,17 +16,17 @@ public class Tarea {
     private String nombre;
     private String estado;
     private String descripcion;
-    private String personaAsignada;
+    private Integer legajoPersonaAsignada;
 
     public Tarea() {
     }
 
-    public Tarea(Long codigoProyecto, String nombre, String descripcion, String personaAsignada) {
+    public Tarea(Long codigoProyecto, String nombre, String descripcion, Integer legajoPersonaAsignada) {
         this.codigoProyecto = codigoProyecto;
         this.nombre = nombre;
         this.estado = "CREADA";
         this.descripcion = descripcion;
-        this.personaAsignada = personaAsignada;
+        this.legajoPersonaAsignada = legajoPersonaAsignada;
     }
 
     public Long getId() {
@@ -67,12 +67,12 @@ public class Tarea {
         this.descripcion = descripcion;
     }
 
-    public String getPersonaAsignada() {
-        return personaAsignada;
+    public Integer getLegajoPersonaAsignada() {
+        return legajoPersonaAsignada;
     }
 
-    public void setPersonaAsignada(String personaAsignada) {
-        this.personaAsignada = personaAsignada;
+    public void setLegajoPersonaAsignada(Integer personaAsignada) {
+        this.legajoPersonaAsignada = personaAsignada;
     }
 
 }

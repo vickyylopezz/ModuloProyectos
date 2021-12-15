@@ -18,5 +18,5 @@ public interface TareaRepository extends CrudRepository<Tarea, Long> {
 
     Iterable<Tarea> findAllByEstado(String estado);
 
-    Iterable<Tarea> findAllByPersonaAsignada(String empleado);
+    Iterable<Tarea> findAllByLegajoPersonaAsignada(Integer legajoPersonaAsignada);
 }

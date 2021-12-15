@@ -14,7 +14,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     private String nombreTarea;
     private Long codigoProyecto;
     private String descripcion;
-    private String personaAsignada;
+    private Integer personaAsignada;
     private String estado;
     private Iterable<Tarea> tareasObtenidas;
     private TareaFinalizadaException tareaFinalizada;
@@ -24,7 +24,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.nombreTarea = "Tarea A";
         this.codigoProyecto = 1L;
         this.descripcion = "Descripcion 1";
-        this.personaAsignada = "Marcos Cesar";
+        this.personaAsignada = 34;
     }
 
     @When("^Creo una tarea$")
@@ -38,7 +38,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         assertEquals(this.codigoProyecto, tarea.getCodigoProyecto());
         assertEquals("CREADA", tarea.getEstado());
         assertEquals(this.descripcion, tarea.getDescripcion());
-        assertEquals(this.personaAsignada, tarea.getPersonaAsignada());
+        assertEquals(this.personaAsignada, tarea.getLegajoPersonaAsignada());
         eliminarTodasLasTareas();
     }
 
@@ -48,7 +48,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.nombreTarea = "Tarea A";
         this.codigoProyecto = 1L;
         this.descripcion = "Descripcion 1";
-        this.personaAsignada = "Marcos Cesar";
+        this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
     }
 
@@ -57,9 +57,9 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.nombreTarea = "Tarea A";
         this.codigoProyecto = 1L;
         this.descripcion = "Descripcion 1";
-        this.personaAsignada = "Marcos Cesar";
+        this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
-        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getLegajoPersonaAsignada(), "FINALIZADA");
 
     }
 
@@ -89,7 +89,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.nombreTarea = "Tarea A";
         this.codigoProyecto = 1L;
         this.descripcion = "Descripcion 1";
-        this.personaAsignada = "Marcos Cesar";
+        this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
     }
 
@@ -98,9 +98,9 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         this.nombreTarea = "Tarea A";
         this.codigoProyecto = 1L;
         this.descripcion = "Descripcion 1";
-        this.personaAsignada = "Marcos Cesar";
+        this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
-        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getPersonaAsignada(), "FINALIZADA");
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto() , tarea.getNombre(), tarea.getDescripcion(), tarea.getLegajoPersonaAsignada(), "FINALIZADA");
     }
 
     @When("^Edito la tarea$")
@@ -119,7 +119,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
         assertEquals(this.codigoProyecto, tarea.getCodigoProyecto());
         assertEquals(this.nombreTarea, tarea.getNombre());
         assertEquals(descripcion, tarea.getDescripcion());
-        assertEquals(this.personaAsignada, tarea.getPersonaAsignada());
+        assertEquals(this.personaAsignada, tarea.getLegajoPersonaAsignada());
         assertEquals(this.estado, tarea.getEstado());
         eliminarTodasLasTareas();
     }
@@ -133,10 +133,10 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @Given("^Que se quiere agregar tareas a un mismo proyecto$")
     public void queSeQuiereAgregarTareasAUnMismoProyecto() {
-        crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
-        crearTarea(15L, "Tarea B", "Descripcio 2", "Carlos");
-        crearTarea(15L, "Tarea C", "Descripcio 3", "Manuela");
-        crearTarea(13L, "Tarea D", "Descripcio 4", "Lorena");
+        crearTarea(15L, "Tarea A", "Descripcio 1", 23);
+        crearTarea(15L, "Tarea B", "Descripcio 2", 13);
+        crearTarea(15L, "Tarea C", "Descripcio 3", 4);
+        crearTarea(13L, "Tarea D", "Descripcio 4", 5);
     }
 
     @When("^Agrego las tareas$")
@@ -152,10 +152,10 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @Given("^Que se quiere filtrar las tareas por nombre$")
     public void queSeQuiereFiltrarLasTareasPorNombre() {
-        crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
-        crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
-        crearTarea(15L, "Tarea B", "Descripcio 3", "Manuela");
-        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+        crearTarea(15L, "Tarea A", "Descripcio 1", 24);
+        crearTarea(16L, "Tarea A", "Descripcio 2", 12);
+        crearTarea(15L, "Tarea B", "Descripcio 3", 47);
+        crearTarea(13L, "Tarea A", "Descripcio 4", 9);
     }
 
     @When("^Hago el filtrado de tareas por nombre$")
@@ -171,13 +171,13 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @Given("^Que se quiere filtrar las tareas por estado$")
     public void queSeQuiereFiltrarLasTareasPorEstado() {
-        tarea = crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
-        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"FINALIZADA");
-        tarea = crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
-        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
-        tarea = crearTarea(15L, "Tarea B", "Descripcio 3", "Manuela");
-        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getPersonaAsignada(),"ENCURSO");
-        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+        tarea = crearTarea(15L, "Tarea A", "Descripcio 1", 12);
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getLegajoPersonaAsignada(),"FINALIZADA");
+        tarea = crearTarea(16L, "Tarea A", "Descripcio 2", 13);
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getLegajoPersonaAsignada(),"ENCURSO");
+        tarea = crearTarea(15L, "Tarea B", "Descripcio 3", 14);
+        tarea = modificarTarea(tarea.getId(),tarea.getCodigoProyecto(),tarea.getNombre(),tarea.getDescripcion(),tarea.getLegajoPersonaAsignada(),"ENCURSO");
+        crearTarea(13L, "Tarea A", "Descripcio 4", 15);
     }
 
     @When("^Hago el filtrado de tareas por estado en curso$")
@@ -204,15 +204,15 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
 
     @Given("^Que se quiere filtrar las tareas por empleado asignado$")
     public void queSeQuiereFiltrarLasTareasPorEmpleadoAsignado() {
-        crearTarea(15L, "Tarea A", "Descripcio 1", "Marta");
-        crearTarea(16L, "Tarea A", "Descripcio 2", "Carlos");
-        crearTarea(15L, "Tarea B", "Descripcio 3", "Marta");
-        crearTarea(13L, "Tarea A", "Descripcio 4", "Lorena");
+        crearTarea(15L, "Tarea A", "Descripcio 1", 11);
+        crearTarea(16L, "Tarea A", "Descripcio 2", 13);
+        crearTarea(15L, "Tarea B", "Descripcio 3", 11);
+        crearTarea(13L, "Tarea A", "Descripcio 4", 21);
     }
 
     @When("^Hago el filtrado de tareas por empleado asignado$")
     public void hagoElFiltradoDeTareasPorEmpleadoAsignado() {
-        tareasObtenidas = obtenerTodasLasTareasConEmpleadoAsignado("Marta");
+        tareasObtenidas = obtenerTodasLasTareasConEmpleadoAsignado(11);
     }
 
 

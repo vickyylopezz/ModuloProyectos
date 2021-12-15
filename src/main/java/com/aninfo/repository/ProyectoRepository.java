@@ -13,5 +13,5 @@ public interface ProyectoRepository extends CrudRepository<Proyecto, Long> {
 
     Iterable<Proyecto> findAllByEstado(String estado);
 
-    Iterable<Proyecto> findAllByLiderDeProyecto(String lider);
+    Iterable<Proyecto> findAllByLegajoLider(Integer legajoLider);
 }

@@ -42,7 +42,7 @@ public class ProyectoService {
         proyectoRepository.deleteById(codigo);
     }
 
-    public Proyecto modificarProyecto(Long codigoProyecto, String nombre, String liderDeProyecto, String descripcion, String estado) {
+    public Proyecto modificarProyecto(Long codigoProyecto, String nombre, Integer liderDeProyecto, String descripcion, String estado) {
         Proyecto proyecto = proyectoRepository.findProyectoById(codigoProyecto);
 
         if(proyecto.getEstado().equals("FINALIZADO")){
@@ -74,8 +74,8 @@ public class ProyectoService {
         proyectoRepository.deleteAll();
     }
 
-    public Iterable<Proyecto> obtenerTodosLosProyectosConLider(String lider) {
-        return proyectoRepository.findAllByLiderDeProyecto(lider);
+    public Iterable<Proyecto> obtenerTodosLosProyectosConLider(Integer lider) {
+        return proyectoRepository.findAllByLegajoLider(lider);
     }
 
     public boolean proyectoFinalizado(Long codigo){

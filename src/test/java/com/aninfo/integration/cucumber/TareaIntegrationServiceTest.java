@@ -16,7 +16,7 @@ public class TareaIntegrationServiceTest {
     @Autowired
     TareaService tareaService;
 
-    Tarea crearTarea(Long codigoProyecto, String nombre, String descripcion, String personaAsignada) {
+    Tarea crearTarea(Long codigoProyecto, String nombre, String descripcion, Integer personaAsignada) {
         return tareaService.crearTarea(new Tarea(codigoProyecto, nombre, descripcion, personaAsignada));
     }
 
@@ -29,7 +29,7 @@ public class TareaIntegrationServiceTest {
     boolean existeTarea(Long codigoTarea) { return tareaService.existeTarea(codigoTarea);
     }
 
-    Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, String personaAsignada, String estado) {
+    Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, Integer personaAsignada, String estado) {
         return tareaService.modificarTarea(codigoTarea, codigoProyecto,nombreTarea,descripcion,personaAsignada,estado);
     }
 
@@ -45,7 +45,7 @@ public class TareaIntegrationServiceTest {
         return tareaService.obtenerTodasLasTareasConEstado(estado);
     }
 
-    Iterable<Tarea> obtenerTodasLasTareasConEmpleadoAsignado(String empleado) {
+    Iterable<Tarea> obtenerTodasLasTareasConEmpleadoAsignado(Integer empleado) {
         return tareaService.obtenerTodasLasTareasConEmpleado(empleado);
 
     }

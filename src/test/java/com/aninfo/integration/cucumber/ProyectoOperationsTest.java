@@ -12,7 +12,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
 
     private Proyecto proyecto;
     private String nombreProyecto;
-    private String liderProyecto;
+    private Integer legajoLider;
     private String descripcion;
     private String estado;
     private Iterable<Proyecto> proyectosObtenidos;
@@ -21,19 +21,19 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     @Given("^Que se quiere crear un proyecto$")
     public void queSeQuiereCrearUnProyecto() {
         this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
+        this.legajoLider = 23;
         this.descripcion = "Desarrollo de nueva API de Psa";
     }
 
     @When("^Creo un proyecto$")
     public void creoUnProyecto() {
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
     }
 
     @Then("^Se carga el proyecto en el sistema con los datos correspondientes$")
     public void seCargaElProyectoEnElSistemaConLosDatosCorrespondientes() {
         assertEquals(this.nombreProyecto, proyecto.getNombre());
-        assertEquals(this.liderProyecto, proyecto.getLiderDeProyecto());
+        assertEquals(this.legajoLider, proyecto.getLiderDeProyecto());
         assertEquals("CREADO", proyecto.getEstado());
         assertEquals(this.descripcion, proyecto.getDescripcion());
         eliminarTodosLosProyectos();
@@ -42,17 +42,17 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     @Given("^Que se quiere eliminar un proyecto$")
     public void queSeQuiereEliminarUnProyecto() {
         this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
+        this.legajoLider = 23;
         this.descripcion = "Desarrollo de nueva API de Psa";
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
     }
 
     @Given("^Que se quiere eliminar un proyecto finalizado$")
     public void queSeQuiereEliminarUnProyectoFinalizado() {
         this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
+        this.legajoLider = 23;
         this.descripcion = "Desarrollo de nueva API de Psa";
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
         proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
     }
 
@@ -82,28 +82,28 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     @Given("^Que se quiere editar un proyecto$")
     public void queSeQuiereEditarUnProyecto() {
         this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
+        this.legajoLider = 23;
         this.descripcion = "Desarrollo de nueva API de Psa";
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
     }
 
     @Given("^Que se quiere editar un proyecto finalizado$")
     public void queSeQuiereEditarUnProyectoFinalizado() {
         this.nombreProyecto = "Proyecto A";
-        this.liderProyecto = "Carlos Zarate";
+        this.legajoLider = 23;
         this.descripcion = "Desarrollo de nueva API de Psa";
-        proyecto = crearProyecto(nombreProyecto, liderProyecto,descripcion);
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
         proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(), proyecto.getDescripcion(), "FINALIZADO");
     }
 
     @When("^Edito el proyecto$")
     public void editoElProyecto() {
         nombreProyecto = "ProyectoB";
-        liderProyecto = "Claudia Suarez";
+        legajoLider = 54;
         estado = "ENCURSO";
 
         try{
-            proyecto = modificarProyecto(proyecto.getId(), nombreProyecto, liderProyecto, proyecto.getDescripcion(), estado);
+            proyecto = modificarProyecto(proyecto.getId(), nombreProyecto, legajoLider, proyecto.getDescripcion(), estado);
         } catch (ProyectoFinalizadoException proyectoFinalizado){
             this.proyectoFinalizado = proyectoFinalizado;
         }
@@ -113,7 +113,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     public void seMeActualizaraLaInformacionDelMismo() {
         assertEquals(this.nombreProyecto, proyecto.getNombre());
         assertEquals(this.estado, proyecto.getEstado());
-        assertEquals(this.liderProyecto, proyecto.getLiderDeProyecto());
+        assertEquals(this.legajoLider, proyecto.getLiderDeProyecto());
         assertEquals(descripcion, proyecto.getDescripcion());
         eliminarTodosLosProyectos();
     }
@@ -128,11 +128,11 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
 
     @Given("^Que se quiere filtrar los proyectos por nombre$")
     public void queSeQuiereFiltrarLosProyectosPorNombre() {
-        crearProyecto("ProyectoA", "Carlos","Descripcion1");
-        crearProyecto("ProyectoA", "Marcela","Descripcion2");
-        crearProyecto("ProyectoA", "Juana","Descripcion3");
-        crearProyecto("ProyectoB", "Claudio","Descripcion4");
-        crearProyecto("ProyectoC", "Juan","Descripcion5");
+        crearProyecto("ProyectoA", 67,"Descripcion1");
+        crearProyecto("ProyectoA", 2,"Descripcion2");
+        crearProyecto("ProyectoA", 19,"Descripcion3");
+        crearProyecto("ProyectoB", 87,"Descripcion4");
+        crearProyecto("ProyectoC", 45,"Descripcion5");
     }
 
     @When("^Hago el filtrado por nombre$")
@@ -148,14 +148,14 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
 
     @Given("^Que se quiere filtrar los proyectos por estado$")
     public void queSeQuiereFiltrarLosProyectosPorEstado() {
-        proyecto = crearProyecto("ProyectoA", "Carlos","Descripcion1");
+        proyecto = crearProyecto("ProyectoA", 45,"Descripcion1");
         proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
-        proyecto = crearProyecto("ProyectoA", "Marcela","Descripcion2");
+        proyecto = crearProyecto("ProyectoA", 23,"Descripcion2");
         proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"ENCURSO");
-        proyecto = crearProyecto("ProyectoA", "Juana","Descripcion3");
+        proyecto = crearProyecto("ProyectoA", 22,"Descripcion3");
         proyecto = modificarProyecto(proyecto.getId(),proyecto.getNombre(),proyecto.getLiderDeProyecto(),proyecto.getDescripcion(),"FINALIZADO");
-        crearProyecto("ProyectoB", "Claudio","Descripcion4");
-        crearProyecto("ProyectoC", "Juan","Descripcion5");
+        crearProyecto("ProyectoB", 56,"Descripcion4");
+        crearProyecto("ProyectoC", 4,"Descripcion5");
     }
 
     @When("^Hago el filtrado por estado en curso$")
@@ -183,16 +183,16 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
 
     @Given("^Que se quiere filtrar los proyectos por lider$")
     public void queSeQuiereFiltrarLosProyectosPorLider() {
-        crearProyecto("ProyectoA", "Carlos","Descripcion1");
-        crearProyecto("ProyectoA", "Carlos","Descripcion2");
-        crearProyecto("ProyectoA", "Juana","Descripcion3");
-        crearProyecto("ProyectoB", "Claudio","Descripcion4");
-        crearProyecto("ProyectoC", "Carlos","Descripcion5");
+        crearProyecto("ProyectoA", 25,"Descripcion1");
+        crearProyecto("ProyectoA", 25,"Descripcion2");
+        crearProyecto("ProyectoA", 7,"Descripcion3");
+        crearProyecto("ProyectoB", 34,"Descripcion4");
+        crearProyecto("ProyectoC", 25,"Descripcion5");
     }
 
     @When("^Hago el filtrado por lider$")
     public void hagoElFiltradoPorLider() {
-        proyectosObtenidos = obtenerTodosLosProyectosConLider("Carlos");
+        proyectosObtenidos = obtenerTodosLosProyectosConLider(25);
 
     }
 

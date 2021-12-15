@@ -61,7 +61,7 @@ public class TareaService {
     public boolean existeTarea(Long codigoTarea) { return tareaRepository.existsById(codigoTarea);
     }
 
-    public Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, String personaAsignada, String estado) {
+    public Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, Integer personaAsignada, String estado) {
         Tarea tarea = tareaRepository.findTareaById(codigoTarea);
         //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
 
@@ -76,7 +76,7 @@ public class TareaService {
         tarea.setCodigoProyecto(codigoProyecto);
         tarea.setNombre(nombreTarea);
         tarea.setDescripcion(descripcion);
-        tarea.setPersonaAsignada(personaAsignada);
+        tarea.setLegajoPersonaAsignada(personaAsignada);
         tarea.setEstado(estado);
         tareaRepository.deleteById(tarea.getId());
 
@@ -95,8 +95,8 @@ public class TareaService {
         return tareaRepository.findAllByEstado(estado);
     }
 
-    public Iterable<Tarea> obtenerTodasLasTareasConEmpleado(String empleado) {
-        return tareaRepository.findAllByPersonaAsignada(empleado);
+    public Iterable<Tarea> obtenerTodasLasTareasConEmpleado(Integer empleado) {
+        return tareaRepository.findAllByLegajoPersonaAsignada(empleado);
 
     }
 }

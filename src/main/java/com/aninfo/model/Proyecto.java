@@ -11,7 +11,7 @@ public class Proyecto {
     private Long id;
 
     private String nombre;
-    private String liderDeProyecto;
+    private Integer legajoLider;
     private String estado;
     private LocalDateTime fechaCreacion;
     private String descripcion;
@@ -19,9 +19,9 @@ public class Proyecto {
     public Proyecto() {
     }
 
-    public Proyecto(String nombre, String liderDeProyecto, String descripcion) {
+    public Proyecto(String nombre, Integer liderDeProyecto, String descripcion) {
         this.nombre = nombre;
-        this.liderDeProyecto = liderDeProyecto;
+        this.legajoLider = liderDeProyecto;
         this.estado = "CREADO";
         this.descripcion = descripcion;
         this.fechaCreacion = LocalDateTime.now();
@@ -40,12 +40,12 @@ public class Proyecto {
         return nombre;
     }
 
-    public void setLiderDeProyecto(String liderDeProyecto){
-        this.liderDeProyecto = liderDeProyecto;
+    public void setLiderDeProyecto(Integer liderDeProyecto){
+        this.legajoLider = liderDeProyecto;
     }
 
-    public String getLiderDeProyecto(){
-        return liderDeProyecto;
+    public Integer getLiderDeProyecto(){
+        return legajoLider;
     }
 
     public void setEstado(String estado){
