@@ -16,8 +16,8 @@ public class Proyecto {
 
     private String nombre;
     private Integer legajoLider;
-    private String estado;
-    private String fechaCreacion;
+    private String estado = "CREADO";
+    private String fechaCreacion = todayDate();
     private String descripcion;
 
     public Proyecto() {
@@ -71,7 +71,7 @@ public class Proyecto {
     }
 
     public void setFechaCreacion(String fechaCreacion){
-        this.fechaCreacion = todayDate();
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getFechaCreacion(){
