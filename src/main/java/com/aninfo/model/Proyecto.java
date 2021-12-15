@@ -1,5 +1,8 @@
 package com.aninfo.model;
 
+import jdk.jfr.SettingDefinition;
+import org.hibernate.annotations.Generated;
+
 import javax.persistence.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -16,14 +19,15 @@ public class Proyecto {
 
     private String nombre;
     private Integer legajoLider;
+
     private String estado = "CREADO";
     private String fechaCreacion = todayDate();
     private String descripcion;
 
-    public Proyecto() {
+    protected Proyecto() {
     }
 
-    private String todayDate() {
+    public String todayDate() {
 
             SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
             Calendar calendar = Calendar.getInstance();
@@ -38,8 +42,6 @@ public class Proyecto {
         this.estado = "CREADO";
         this.descripcion = descripcion;
         this.fechaCreacion = todayDate();
-
-
     }
 
     public Long getId() { return id; }

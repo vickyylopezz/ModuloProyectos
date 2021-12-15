@@ -40,6 +40,8 @@ public class ProyectosApp {
 	@PostMapping("/proyectos")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Proyecto crearProyecto(@RequestBody Proyecto proyecto) {
+		proyecto.setFechaCreacion(proyecto.todayDate());
+		proyecto.setEstado("CREADO");
 		return proyectoService.crearProyecto(proyecto);
 	}
 
@@ -79,6 +81,7 @@ public class ProyectosApp {
 	@PostMapping("/proyectos/{codigoProyecto}/tareas")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Tarea createTarea(@RequestBody Tarea tarea) {
+		tarea.setEstado("CREADA");
 		return tareaService.crearTarea(tarea);
 	}
 
