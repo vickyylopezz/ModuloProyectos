@@ -23,7 +23,7 @@ public class Proyecto {
     public Proyecto() {
     }
 
-    public String todayDate() {
+    private String todayDate() {
 
             SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
             Calendar calendar = Calendar.getInstance();
@@ -71,7 +71,7 @@ public class Proyecto {
     }
 
     public void setFechaCreacion(String fechaCreacion){
-        this.fechaCreacion = fechaCreacion;
+        this.fechaCreacion = todayDate();
     }
 
     public String getFechaCreacion(){
