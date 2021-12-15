@@ -1,0 +1,14 @@
+version: '3.6'
+services:
+  postgres:
+    image: postgres:11.9
+    container_name: squad7-proyectos
+    restart: always
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
+    ports:
+      - '5434:5432'
+    volumes:
+      - ./db_init.sql:/docker-entrypoint-initdb.d/db_init.sql
