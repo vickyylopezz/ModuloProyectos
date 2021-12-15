@@ -23,7 +23,7 @@ public class Proyecto {
     public Proyecto() {
     }
 
-    public String getTodayDate() {
+    public String todayDate() {
 
             SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
             Calendar calendar = Calendar.getInstance();
@@ -37,7 +37,7 @@ public class Proyecto {
         this.legajoLider = liderDeProyecto;
         this.estado = "CREADO";
         this.descripcion = descripcion;
-        this.fechaCreacion = getTodayDate();
+        this.fechaCreacion = todayDate();
 
 
     }
