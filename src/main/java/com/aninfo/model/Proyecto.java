@@ -15,11 +15,22 @@ public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "proyecto_id")
     private Long id;
+
+    @Column(name = "proyecto_nombre")
     private String nombre;
+
+    @Column(name = "proyecto_legajo_lider")
     private Integer legajoLider;
+
+    @Column(name = "proyecto_estado")
     private String estado = "CREADO";
+
+    @Column(name = "proyecto_fecha")
     private String fechaCreacion = todayDate();
+
+    @Column(name = "proyecto_descripcion")
     private String descripcion;
 
     protected Proyecto() {

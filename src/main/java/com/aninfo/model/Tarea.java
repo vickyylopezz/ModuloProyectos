@@ -7,11 +7,22 @@ public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "tarea_id")
     private Long id;
+
+    @Column(name = "tarea_id_proyecto")
     private Long codigoProyecto;
+
+    @Column(name = "tarea_nombre")
     private String nombre;
-    private String estado;
+
+    @Column(name = "tarea_estado")
+    private String estado = "CREADA";
+
+    @Column(name = "tarea_descripcion")
     private String descripcion;
+
+    @Column(name = "tarea_legajo_empleado")
     private Integer legajoPersonaAsignada;
 
     public Tarea() {
