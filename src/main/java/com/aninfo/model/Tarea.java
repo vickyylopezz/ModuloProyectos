@@ -1,9 +1,6 @@
 package com.aninfo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Tarea {
@@ -11,7 +8,6 @@ public class Tarea {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private Long codigoProyecto;
     private String nombre;
     private String estado;

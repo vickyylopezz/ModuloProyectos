@@ -16,10 +16,8 @@ public class Proyecto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String nombre;
     private Integer legajoLider;
-
     private String estado = "CREADO";
     private String fechaCreacion = todayDate();
     private String descripcion;
@@ -29,11 +27,11 @@ public class Proyecto {
 
     public String todayDate() {
 
-            SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
-            Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dtf = new SimpleDateFormat("dd/MM/yyyy");
+        Calendar calendar = Calendar.getInstance();
 
-            Date dateObj = calendar.getTime();
-            return dtf.format(dateObj);
+        Date dateObj = calendar.getTime();
+        return dtf.format(dateObj);
     }
 
     public Proyecto(String nombre, Integer liderDeProyecto, String descripcion) {
