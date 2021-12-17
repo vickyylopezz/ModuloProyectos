@@ -75,6 +75,7 @@ public class ProyectosApp {
 	@DeleteMapping("/proyectos/{codigo}")
 	public void deleteProyecto(@PathVariable Long codigo) {
 		proyectoService.deleteById(codigo);
+		tareaService.deleteByCodigoProyecto(codigo);
 	}
 
 	//Crear tarea

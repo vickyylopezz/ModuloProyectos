@@ -46,4 +46,7 @@ Feature: Proyectos operations
     When Hago el filtrado por lider
     Then Se me mostraran solo los proyectos con el lider elegido
 
-
+  Scenario: Eliminar un proyecto con tareas
+    Given Que se quiere eliminar un proyecto con tareas
+    When Elimino un proyecto
+    Then Se me eliminaran las tareas que tenia

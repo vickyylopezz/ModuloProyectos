@@ -2,6 +2,7 @@ package com.aninfo.integration.cucumber;
 
 import com.aninfo.exceptions.ProyectoFinalizadoException;
 import com.aninfo.model.Proyecto;
+import com.aninfo.model.Tarea;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -60,6 +61,7 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
     public void eliminoUnProyecto() {
         try {
             eliminarProyecto(proyecto.getId());
+            eliminarTareasDeProyecto(proyecto.getId());
 
         } catch (ProyectoFinalizadoException proyectoFinalizado) {
             this.proyectoFinalizado = proyectoFinalizado;
@@ -201,5 +203,22 @@ public class ProyectoOperationsTest extends ProyectoIntegrationServiceTest {
         assertEquals(proyectosObtenidos.spliterator().getExactSizeIfKnown(),3);
         eliminarTodosLosProyectos();
     }
+
+    @Given("^Que se quiere eliminar un proyecto con tareas$")
+    public void queSeQuiereEliminarUnProyectoConTareas() {
+        this.nombreProyecto = "Proyecto A";
+        this.legajoLider = 23;
+        this.descripcion = "Desarrollo de nueva API de Psa";
+        proyecto = crearProyecto(nombreProyecto, legajoLider,descripcion);
+        crearTarea(proyecto.getId(), "Tarea 1", "Descripcion A", 12);
+        crearTarea(proyecto.getId(), "Tarea 2", "Descripcion B", 3);
+    }
+
+    @Then("^Se me eliminaran las tareas que tenia$")
+    public void seMeEliminaranLasTareasQueTenia() {
+        Iterable<Tarea> tareas = obtenerTareasDeProyecto(proyecto.getId());
+        assertEquals(tareas.spliterator().getExactSizeIfKnown(),0);
+    }
+
 
 }

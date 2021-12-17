@@ -6,6 +6,7 @@ import com.aninfo.repository.ProyectoRepository;
 import com.aninfo.repository.TareaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -44,6 +45,17 @@ public class TareaService {
             throw new TareaFinalizadaException("No se puede eliminar una tarea finalizada");
         }
         tareaRepository.deleteById(codigoTarea);
+    }
+
+    @Transactional
+    public void deleteByCodigoProyecto(Long codigoProyecto) {
+        //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
+
+        /*if(proyecto.getEstado().equals("FINALIZADO")){
+            throw new ProyectoFinalizadoException("No se puede eliminar las tareas de un proyecto finalizado");
+        }*/
+
+        tareaRepository.deleteAllByCodigoProyecto(codigoProyecto);
     }
 
     public Optional<Tarea> findById(Long codigoTarea) {

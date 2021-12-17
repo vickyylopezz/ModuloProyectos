@@ -2,7 +2,9 @@ package com.aninfo.integration.cucumber;
 
 import com.aninfo.ProyectosApp;
 import com.aninfo.model.Proyecto;
+import com.aninfo.model.Tarea;
 import com.aninfo.service.ProyectoService;
+import com.aninfo.service.TareaService;
 import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -17,6 +19,9 @@ public class ProyectoIntegrationServiceTest {
 
     @Autowired
     ProyectoService proyectoService;
+
+    @Autowired
+    TareaService tareaService;
 
     Proyecto crearProyecto(String nombre,
                            Integer liderDeProyecto,
@@ -50,5 +55,17 @@ public class ProyectoIntegrationServiceTest {
 
     Iterable<Proyecto> obtenerTodosLosProyectosConLider(Integer lider) {
         return proyectoService.obtenerTodosLosProyectosConLider(lider);
+    }
+
+    void eliminarTareasDeProyecto(Long id) {
+        tareaService.deleteByCodigoProyecto(id);
+    }
+
+    Tarea crearTarea(Long codigoProyecto, String nombre, String descripcion, Integer personaAsignada) {
+        return tareaService.crearTarea(new Tarea(codigoProyecto, nombre, descripcion, personaAsignada));
+    }
+
+    Iterable<Tarea> obtenerTareasDeProyecto(Long id) {
+        return tareaService.obtenerTodasLasTareasConConCodigoProyecto(id);
     }
 }
