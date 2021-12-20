@@ -1,10 +1,13 @@
 package com.aninfo.integration.cucumber;
 
 import com.aninfo.exceptions.TareaFinalizadaException;
+import com.aninfo.model.Proyecto;
 import com.aninfo.model.Tarea;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +25,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere crear una tarea$")
     public void queSeQuiereCrearUnaTarea() {
         this.nombreTarea = "Tarea A";
-        this.codigoProyecto = 1L;
+        this.codigoProyecto = 15L;
         this.descripcion = "Descripcion 1";
         this.personaAsignada = 34;
     }
@@ -46,7 +49,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere eliminar una tarea$")
     public void queSeQuiereEliminarUnaTarea() {
         this.nombreTarea = "Tarea A";
-        this.codigoProyecto = 1L;
+        this.codigoProyecto = 15L;
         this.descripcion = "Descripcion 1";
         this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
@@ -55,7 +58,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere eliminar una tarea finalizada$")
     public void queSeQuiereEliminarUnaTareaFinalizada() {
         this.nombreTarea = "Tarea A";
-        this.codigoProyecto = 1L;
+        this.codigoProyecto = 15L;
         this.descripcion = "Descripcion 1";
         this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
@@ -87,7 +90,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere editar una tarea$")
     public void queSeQuiereEditarUnaTarea() {
         this.nombreTarea = "Tarea A";
-        this.codigoProyecto = 1L;
+        this.codigoProyecto = 15L;
         this.descripcion = "Descripcion 1";
         this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);
@@ -96,7 +99,7 @@ public class TareaOperationsTest extends TareaIntegrationServiceTest{
     @Given("^Que se quiere editar una tarea finalizada$")
     public void queSeQuiereEditarUnaTareaFinalizada() {
         this.nombreTarea = "Tarea A";
-        this.codigoProyecto = 1L;
+        this.codigoProyecto = 15L;
         this.descripcion = "Descripcion 1";
         this.personaAsignada = 34;
         tarea = crearTarea(codigoProyecto , nombreTarea, descripcion, personaAsignada);

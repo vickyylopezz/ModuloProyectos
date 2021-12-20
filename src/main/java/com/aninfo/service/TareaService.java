@@ -24,22 +24,12 @@ public class TareaService {
     }
 
     public Tarea crearTarea(Tarea tarea) {
-        /*Proyecto proyecto = proyectoRepository.findProyectoById(tarea.getCodigoProyecto());
-
-        if(proyecto.getEstado().equals("FINALIZADO")){
-            throw new ProyectoFinalizadoException("No se puede agregar una tarea a un proyecto finalizado");
-        }*/
 
         return tareaRepository.save(tarea);
     }
 
     public void deleteById(Long codigoTarea) {
         Tarea tarea = tareaRepository.findTareaById(codigoTarea);
-        //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
-
-        /*if(proyecto.getEstado().equals("FINALIZADO")){
-            throw new ProyectoFinalizadoException("No se puede agregar una tarea a un proyecto finalizado");
-        }*/
 
         if(tarea.getEstado().equals("FINALIZADA")){
             throw new TareaFinalizadaException("No se puede eliminar una tarea finalizada");
@@ -49,11 +39,6 @@ public class TareaService {
 
     @Transactional
     public void deleteByCodigoProyecto(Long codigoProyecto) {
-        //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
-
-        /*if(proyecto.getEstado().equals("FINALIZADO")){
-            throw new ProyectoFinalizadoException("No se puede eliminar las tareas de un proyecto finalizado");
-        }*/
 
         tareaRepository.deleteAllByCodigoProyecto(codigoProyecto);
     }
@@ -75,11 +60,6 @@ public class TareaService {
 
     public Tarea modificarTarea(Long codigoTarea, Long codigoProyecto, String nombreTarea, String descripcion, Integer personaAsignada, String estado) {
         Tarea tarea = tareaRepository.findTareaById(codigoTarea);
-        //Proyecto proyecto = proyectoRepository.findProyectoByCodigo(tarea.getCodigoProyecto());
-
-        /*if(proyecto.getEstado().equals("FINALIZADO")){
-            throw new ProyectoFinalizadoException("No se puede agregar una tarea a un proyecto finalizado");
-        }*/
 
         if(tarea.getEstado().equals("FINALIZADA")){
             throw new TareaFinalizadaException("No se puede modificar una tarea finalizada");
